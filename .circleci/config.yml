@@ -36,4 +36,3 @@ workflows:
       - pa11yci/a11y-audit:
           custom_url_command: |
       - lighthouse:
-                  context: LIGHTHOUSE
