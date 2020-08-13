@@ -1,7 +1,5 @@
 description: >
-  Use the Orb to run accessibility tests when a preview branch is created. (Assumes you are using
-  https://staging.myproject.com in your .pa11yci file, and replaces that with the URL found at
-  /tmp/workspace/preview-url.)
+  Use the Orb to run accessibility tests on your staging environment when a PR is merged.
 
 usage:
   version: 2.1
@@ -16,24 +14,19 @@ usage:
         - preview:
             requires:
               - tests
-        - pa11yci/a11y-audit:
-            requires:
-              - preview
-            custom_url_command: |
-              if [[ -f /tmp/workspace/preview-url ]]; then
-                sed -i -e "s#https://test.myproject.com#`cat /tmp/workspace/preview-url`#g" .pa11yci
-              fi
-            filters:
-              branches:
-                ignore: master
         - deploy:
             requires:
               - build
-              - pa11yci/run
             filters:
               branches:
                 only:
                   - master
+        - pa11yci/a11y-audit:
+            requires:
+              - deploy
+            filters:
+              branches:
+                only: master
 
   jobs:
     tests:
@@ -47,18 +40,6 @@ usage:
         - run:
             name: Run tests
             command: bundle exec rspec
-    preview:
-      docker:
-        - image: circleci/ruby
-      steps:
-        - attach_workspace:
-            at: /tmp/workspace
-        - checkout
-        - run:
-            name: Create preview environment
-            command: |
-              # Create your preview environment and save
-              # the URL to /tmp/workspace/preview-url
     deploy:
       docker:
         - image: circleci/ruby
