@@ -13,7 +13,7 @@ jobs:
     executor: lighthouse-check/default
     steps:
       - lighthouse-check/audit:
-          urls: https://www.salesforce.software
+          urls: https://www.salesforce.com
 workflows:
   build-and-deploy:
     jobs:
