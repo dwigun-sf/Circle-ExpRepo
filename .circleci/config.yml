@@ -1,7 +1,11 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+  pa11yci: nebulab/pa11yci@1.0.0
 workflows:
   node-tests:
     jobs:
       - node/test
+  pally-check:
+    jobs:
+      - pa11yci/a11y-audit
