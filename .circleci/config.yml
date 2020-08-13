@@ -10,22 +10,3 @@ workflows:
           filters:
             branches:
               only: master
-jobs:
-  tests:
-    docker:
-      - image: circleci/ruby
-    steps:
-      - checkout
-      - run:
-          name: Install bundle
-          command: bundle install
-      - run:
-          name: Run tests
-          command: bundle exec rspec
-  deploy:
-    docker:
-      - image: circleci/ruby
-    steps:
-      - run:
-          name: Deploy to production
-          command: git push production master
