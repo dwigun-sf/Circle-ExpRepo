@@ -16,6 +16,7 @@ workflows:
       - pa11yci/a11y-audit:
           requires:
             - deploy
+          custom_url_command: https://www.salesforce.com
           filters:
             branches:
               only: master
