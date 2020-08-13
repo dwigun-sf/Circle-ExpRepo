@@ -6,4 +6,7 @@ workflows:
   build-and-deploy:
     jobs:
       - pa11yci/a11y-audit:
-          custom_url_command: pa11y-ci --sitemap http://pa11y.org/sitemap.xml
+          custom_url_command:  |
+              if [[ -f /tmp/workspace/preview-url ]]; then
+                sed -i -e "s#https://test.myproject.com#`cat /tmp/workspace/preview-url`#g" .pa11yci
+              fi
