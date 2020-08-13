@@ -2,36 +2,18 @@ version: 2.1
 orbs:
   node: circleci/node@3.0.0
   pa11yci: nebulab/pa11yci@1.0.0
+  lighthouse-check: foo-software/lighthouse-check@0.0.8
 executors:
   docker-executor:
       docker:
           - image: circleci/node:latest-browsers
             user: root
 jobs:
-  lighthouse:
-    executor: docker-executor
+  lighthouse: 
+    executor: lighthouse-check/default
     steps:
-        - checkout
-        - setup_remote_docker
-        - run:
-              name: "Install & Run Lighthouse"
-              command: |
-                  docker run -it -dp 8001:8000 -w="/project" -e --name my-app circleci/node:latest-browsers || true
-                  docker cp ~/project/.  my-app:/project/
-                  docker exec -it my-app sudo npm install -g @lhci/cli@0.4.x
-                  docker exec my-app sudo mkdir /project/.lighthouseci || true
-                  docker exec my-app sudo lhci collect --numberOfRuns=1 --url=https://wwww.salesforce.com
-        - run:
-              name: "Copy test results"
-              command: |
-                  docker cp my-app:/project/.lighthouseci .
-        - run:
-              name: "Upload and Set Status"
-              command: |
-                  npm install -g @lhci/cli@0.4.x
-                  lhci upload
-        - store_artifacts:
-              path: "~/project/.lighthouseci"  
+      - lighthouse-check/audit:
+          urls: https://www.salesforce.software
 workflows:
   build-and-deploy:
     jobs:
