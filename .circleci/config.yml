@@ -5,5 +5,6 @@ orbs:
 workflows:
   build-and-deploy:
     jobs:
-      - pa11yci/a11y-audit:
-          custom_url_command: |
+      a11y-audit:
+        - pa11yci/a11y-audit:
+            custom_url_command: |
