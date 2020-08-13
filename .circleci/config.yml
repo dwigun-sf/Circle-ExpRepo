@@ -16,6 +16,8 @@ jobs:
         - run:
               name: "Install & Run Lighthouse"
               command: |
+                  docker run -it -dp 8001:8000 -w="/project" -e --name my-app circleci/node:latest-browsers || true
+                  docker cp ~/project/.  my-app:/project/
                   docker exec -it my-app sudo npm install -g @lhci/cli@0.4.x
                   docker exec my-app sudo mkdir /project/.lighthouseci || true
                   docker exec my-app sudo lhci collect --numberOfRuns=1 --url=https://wwww.salesforce.com
