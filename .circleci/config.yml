@@ -6,5 +6,6 @@ workflows:
   build-and-deploy:
     jobs:
       a11y-audit:
-        - pa11yci/a11y-audit:
-            custom_url_command: |
+        steps:
+          - pa11yci/a11y-audit:
+              custom_url_command: |
