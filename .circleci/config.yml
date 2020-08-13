@@ -6,7 +6,7 @@ workflows:
   build-and-deploy:
     jobs:
       - pa11yci/a11y-audit:
-          custom_url_command: https://www.salesforce.com
+          custom_url_command: pa11y-ci --sitemap http://pa11y.org/sitemap.xml
           filters:
             branches:
               only: master
