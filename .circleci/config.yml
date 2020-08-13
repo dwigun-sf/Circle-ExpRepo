@@ -5,4 +5,4 @@ orbs:
 workflows:
   build-and-deploy:
     jobs:
-      - pa11yci/a11y-audit:
+      - pa11yci/a11y-audit
