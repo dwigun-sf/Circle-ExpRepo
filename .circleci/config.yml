@@ -15,10 +15,8 @@ jobs:
       - lighthouse-check/audit:
           urls: https://www.salesforce.com
   a11y: 
-    executor: pa11yci/default
-    steps:
-      - pa11yci/a11y-audit:
-          custom_url_command: |
+    - pa11yci/a11y-audit:
+        custom_url_command: |
 workflows:
   build-and-deploy:
     jobs:
