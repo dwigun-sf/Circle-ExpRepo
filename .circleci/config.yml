@@ -8,4 +8,8 @@ workflows:
       - node/test
   pally-check:
     jobs:
-      - pa11yci/a11y-audit
+      - pa11yci/a11y-audit:
+          custom_url_command: pally-ci https://www.salesforce.com
+          filters:
+              branches:
+                ignore: master
