@@ -35,4 +35,4 @@ workflows:
     jobs:
       - pa11yci/a11y-audit:
           custom_url_command: |
-      - lighthouse:
+      - lighthouse
