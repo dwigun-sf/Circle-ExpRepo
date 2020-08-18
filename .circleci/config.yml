@@ -13,7 +13,7 @@ jobs:
     executor: lighthouse-check/default
     steps:
       - lighthouse-check/audit:
-          urls: https://salesforce-com-develop.go-vip.net/
+          urls: https://www.salesforce.com/
 workflows:
   build-and-deploy:
     jobs:
